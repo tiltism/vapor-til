@@ -20,3 +20,6 @@ extension Acronym: Migration {}
 
 // db CRUD functions
 extension Acronym: Content {}
+
+// web api parameter support
+extension Acronym: Parameter {}
