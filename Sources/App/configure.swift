@@ -32,9 +32,14 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     databases.add(database: database, as: .psql)
     services.register(databases)
 
-    /// Configure migrations
+    /// Configure migrations (in the order for FK relationships)
     var migrations = MigrationConfig()
+    migrations.add(model: User.self, database: .psql)
     migrations.add(model: Acronym.self, database: .psql)
     services.register(migrations)
-
+    
+    /// Add reset database commands: revert, migrate
+    var commandConfig = CommandConfig.default()
+    commandConfig.useFluentCommands()
+    services.register(commandConfig)
 }
