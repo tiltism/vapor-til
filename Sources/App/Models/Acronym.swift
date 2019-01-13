@@ -23,10 +23,13 @@ extension Acronym: Content {}
 // web api parameter support
 extension Acronym: Parameter {}
 
-// db link to parent
+// computed properties: db link to parent, sibling(s)
 extension Acronym {
     var user: Parent<Acronym, User> {
         return parent(\.userID)
+    }
+    var categories: Siblings<Acronym, Category, AcronymCategoryPivot> {
+        return siblings()
     }
 }
 
